@@ -182,9 +182,17 @@ int main(void)
 	     case initState:
 	     {
 	    	 Test = 1;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 if(ButtonMatrix == 512)
 	    	 {
 	    		 StateOfNumber = firstnum;
+	    	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    		 StateOfNumber = initState;
 	    	 }
 	    	 else
 	    	 {
@@ -195,10 +203,18 @@ int main(void)
 
 	     case firstnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 2;
+	    	 if(ButtonMatrix == 2)
 	    	 {
-	    		 StateOfNumber = firstnum;
+	    		 StateOfNumber = secondnum;
+	    	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    		 StateOfNumber = initState;
 	    	 }
 	    	 else
 	    	 {
@@ -209,10 +225,18 @@ int main(void)
 
 	     case secondnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 3;
+	    	 if(ButtonMatrix == 1024)
 	    	 {
 	    		 StateOfNumber = thirdnum;
+	    	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    		 StateOfNumber = firstnum;
 	    	 }
 	    	 else
 	    	 {
@@ -223,10 +247,18 @@ int main(void)
 
 	     case thirdnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 4;
+	    	 if(ButtonMatrix == 2)
 	    	 {
 	    		 StateOfNumber = fourthnum;
+	    	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    		 StateOfNumber = secondnum;
 	    	 }
 	    	 else
 	    	 {
@@ -238,9 +270,17 @@ int main(void)
 	     case fourthnum:
 	     {
 	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 if(ButtonMatrix == 8)
 	    	 {
 	    		 StateOfNumber = fifthnum;
+	    	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    		 StateOfNumber = thirdnum;
 	    	 }
 	    	 else
 	    	 {
@@ -251,10 +291,18 @@ int main(void)
 
 	     case fifthnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 6;
+	    	 if(ButtonMatrix == 32)
 	    	 {
 	    		 StateOfNumber = sixnum;
+	    	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    		 StateOfNumber = fourthnum;
 	    	 }
 	    	 else
 	    	 {
@@ -265,10 +313,18 @@ int main(void)
 
 	     case sixnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 7;
+	    	 if(ButtonMatrix == 8)
 	    	 {
 	    		 StateOfNumber = sevennum;
+	    	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    	 	 StateOfNumber = fifthnum;
 	    	 }
 	    	 else
 	    	 {
@@ -279,11 +335,19 @@ int main(void)
 
 	     case sevennum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 8;
+	    	 if(ButtonMatrix == 8)
 	    	 {
 	    		 StateOfNumber = eighthnum;
 	     	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    	 	 StateOfNumber = sixnum;
+	    	 }
 	     	 else
 	     	 {
 	     		 StateOfNumber = initState;
@@ -293,11 +357,19 @@ int main(void)
 
 	     case eighthnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 9;
+	    	 if(ButtonMatrix == 8)
 	    	 {
 	    		 StateOfNumber = ninthnum;
 	     	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    		 StateOfNumber = sevennum;
+	    	 }
 	     	 else
 	     	 {
 	     		 StateOfNumber = initState;
@@ -307,11 +379,19 @@ int main(void)
 
 	     case ninthnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 10;
+	    	 if(ButtonMatrix == 1024)
 	    	 {
 	    		 StateOfNumber = tenthnum;
 	     	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    	 	 StateOfNumber = eighthnum;
+	    	 }
 	     	 else
 	     	 {
 	     		 StateOfNumber = initState;
@@ -321,11 +401,19 @@ int main(void)
 
 	     case tenthnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 11;
+	    	 if(ButtonMatrix == 32)
 	    	 {
 	    		 StateOfNumber = eleventhnum;
 	     	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    	 	 StateOfNumber = ninthnum;
+	    	 }
 	     	 else
 	     	 {
 	     		 StateOfNumber = initState;
@@ -335,11 +423,19 @@ int main(void)
 
 	     case eleventhnum:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 12;
+	    	 if(ButtonMatrix == 32768)
 	    	 {
 	    		 StateOfNumber = OKstudentnumber;
 	     	 }
+	    	 else if(ButtonMatrix == 4096)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	    	 else if(ButtonMatrix == 8192)
+	    	 {
+	    	 	 StateOfNumber = tenthnum;
+	    	 }
 	     	 else
 	     	 {
 	     		 StateOfNumber = initState;
@@ -349,8 +445,8 @@ int main(void)
 
 	     case OKstudentnumber:
 	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
+	    	 Test = 13;
+	    	 if(ButtonMatrix == 8)
 	    	 {
 	    		 StateOfNumber = firstnum;
 	     	 }
@@ -360,23 +456,7 @@ int main(void)
 	     	 }
 	     }
 	     break;
-
-	     case sixnum:
-	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 0000000000000010)
-	    	 {
-	    		 StateOfNumber = sevennum;
-	     	 }
-	     	 else
-	     	 {
-	     		 StateOfNumber = initState;
-	     	 }
 	     }
-	     break;
-
-	     }
-
   }
   /* USER CODE END 3 */
 }
