@@ -67,6 +67,9 @@ PortPin L[4] =
 
 };
 
+uint16_t ButtonMatrix = 0;
+uint16_t Test = 0;
+
 typedef enum
 {
 	initState,
@@ -84,7 +87,25 @@ typedef enum
 	OKstudentnumber,
 }StateStudentNumber;
 
-uint16_t ButtonMatrix = 0;
+typedef enum
+{
+	initState_PP,
+	firstnum_PP,
+	secondnum_PP,
+	thirdnum_PP,
+	fourthnum_PP,
+	fifthnum_PP,
+	sixnum_PP,
+	sevennum_PP,
+	eighthnum_PP,
+	ninthnum_PP,
+	tenthnum_PP,
+	eleventhnum_PP,
+	OKstudentnumber_PP,
+}prepareStudentNumber;
+
+//uint16_t ButtonMatrix = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -110,6 +131,7 @@ int main(void)
 
 	// set initial state of student number
 	StateStudentNumber StateOfNumber = initState;
+//	prepareStudentNumber PPOfNumber;
 
   /* USER CODE END 1 */
 
@@ -150,6 +172,42 @@ int main(void)
 	     {
 	      timestamp = HAL_GetTick() + 10;
 	      ReadMatrixButton_1Row();
+	     }
+
+	     // read system events
+
+	     switch (StateOfNumber)
+	     {
+
+	     case initState:
+	     {
+	    	 Test = 1;
+	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = firstnum;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	     }
+	     break;
+
+	     case firstnum:
+	     {
+	    	 Test = 5;
+	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+	    	 if(ButtonMatrix == 0000000000000001)
+	    	 {
+	    		 Test = 8;
+	    		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+	    		 HAL_Delay(100);
+	    	 }
+	     }
+	     break;
+
+
 	     }
 
   }
@@ -253,6 +311,12 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_SET);
+
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
@@ -265,6 +329,38 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA7 PA9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PC7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB3 PB4 PB5 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
@@ -299,6 +395,11 @@ void ReadMatrixButton_1Row()
 	X++;
 	X%=4;
 	}
+
+//void firstnum_PP()
+//{
+//	return firstnum;
+//}
 
 /* USER CODE END 4 */
 
