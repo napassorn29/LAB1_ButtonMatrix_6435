@@ -140,6 +140,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+	  // call  function every 10 ms == 100 Hz
+	  static uint32_t timestamp = 0;
+	     if(HAL_GetTick()>=timestamp)
+	     {
+	      timestamp = HAL_GetTick() + 10;
+	      ReadMatrixButton_1Row();
+	     }
+
   }
   /* USER CODE END 3 */
 }
