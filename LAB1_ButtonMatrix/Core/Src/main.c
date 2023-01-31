@@ -108,6 +108,9 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
+	// set initial state of student number
+	StateStudentNumber StateOfNumber = initState;
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
