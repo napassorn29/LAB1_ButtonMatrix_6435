@@ -42,6 +42,7 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+
 typedef struct _PortPin
 {
  GPIO_TypeDef* PORT;
@@ -65,6 +66,23 @@ PortPin L[4] =
   {GPIOA,GPIO_PIN_7}
 
 };
+
+typedef enum
+{
+	initState,
+	firstnum,
+	secondnum,
+	thirdnum,
+	fourthnum,
+	fifthnum,
+	sixnum,
+	sevennum,
+	eighthnum,
+	ninthnum,
+	tenthnum,
+	eleventhnum,
+	OKstudentnumber,
+}StateStudentNumber;
 
 uint16_t ButtonMatrix = 0;
 /* USER CODE END PV */
