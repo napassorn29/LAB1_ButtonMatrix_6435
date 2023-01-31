@@ -87,22 +87,22 @@ typedef enum
 	OKstudentnumber,
 }StateStudentNumber;
 
-typedef enum
-{
-	initState_PP,
-	firstnum_PP,
-	secondnum_PP,
-	thirdnum_PP,
-	fourthnum_PP,
-	fifthnum_PP,
-	sixnum_PP,
-	sevennum_PP,
-	eighthnum_PP,
-	ninthnum_PP,
-	tenthnum_PP,
-	eleventhnum_PP,
-	OKstudentnumber_PP,
-}prepareStudentNumber;
+//typedef enum
+//{
+//	initState_PP,
+//	firstnum_PP,
+//	secondnum_PP,
+//	thirdnum_PP,
+//	fourthnum_PP,
+//	fifthnum_PP,
+//	sixnum_PP,
+//	sevennum_PP,
+//	eighthnum_PP,
+//	ninthnum_PP,
+//	tenthnum_PP,
+//	eleventhnum_PP,
+//	OKstudentnumber_PP,
+//}prepareStudentNumber;
 
 //uint16_t ButtonMatrix = 0;
 
@@ -182,7 +182,6 @@ int main(void)
 	     case initState:
 	     {
 	    	 Test = 1;
-	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
 	    	 if(ButtonMatrix == 0000000000000010)
 	    	 {
 	    		 StateOfNumber = firstnum;
@@ -197,16 +196,184 @@ int main(void)
 	     case firstnum:
 	     {
 	    	 Test = 5;
-	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
-	    	 if(ButtonMatrix == 0000000000000001)
+	    	 if(ButtonMatrix == 0000000000000010)
 	    	 {
-	    		 Test = 8;
-	    		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
-	    		 HAL_Delay(100);
+	    		 StateOfNumber = firstnum;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = initState;
 	    	 }
 	     }
 	     break;
 
+	     case secondnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = thirdnum;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	     }
+	     break;
+
+	     case thirdnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = fourthnum;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	     }
+	     break;
+
+	     case fourthnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = fifthnum;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	     }
+	     break;
+
+	     case fifthnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = sixnum;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	     }
+	     break;
+
+	     case sixnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = sevennum;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
+	     }
+	     break;
+
+	     case sevennum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = eighthnum;
+	     	 }
+	     	 else
+	     	 {
+	     		 StateOfNumber = initState;
+	     	 }
+	     }
+	     break;
+
+	     case eighthnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = ninthnum;
+	     	 }
+	     	 else
+	     	 {
+	     		 StateOfNumber = initState;
+	     	 }
+	     }
+	     break;
+
+	     case ninthnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = tenthnum;
+	     	 }
+	     	 else
+	     	 {
+	     		 StateOfNumber = initState;
+	     	 }
+	     }
+	     break;
+
+	     case tenthnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = eleventhnum;
+	     	 }
+	     	 else
+	     	 {
+	     		 StateOfNumber = initState;
+	     	 }
+	     }
+	     break;
+
+	     case eleventhnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = OKstudentnumber;
+	     	 }
+	     	 else
+	     	 {
+	     		 StateOfNumber = initState;
+	     	 }
+	     }
+	     break;
+
+	     case OKstudentnumber:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = firstnum;
+	     	 }
+	     	 else
+	     	 {
+	     		 StateOfNumber = initState;
+	     	 }
+	     }
+	     break;
+
+	     case sixnum:
+	     {
+	    	 Test = 5;
+	    	 if(ButtonMatrix == 0000000000000010)
+	    	 {
+	    		 StateOfNumber = sevennum;
+	     	 }
+	     	 else
+	     	 {
+	     		 StateOfNumber = initState;
+	     	 }
+	     }
+	     break;
 
 	     }
 
