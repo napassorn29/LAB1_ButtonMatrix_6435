@@ -43,6 +43,17 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
+typedef struct _CheckState
+{
+	uint16_t current;
+	uint16_t last;
+}CheckState;
+
+CheckState Check[16] =
+{
+	{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1}
+}; // Check State
+
 typedef struct _PortPin
 {
  GPIO_TypeDef* PORT;
@@ -69,6 +80,7 @@ PortPin L[4] =
 
 uint16_t ButtonMatrix = 0;
 uint16_t Test = 0;
+uint16_t edge = 0;
 
 typedef enum
 {
@@ -182,15 +194,15 @@ int main(void)
 	     case initState:
 	     {
 	    	 Test = 1;
-	    	 if(ButtonMatrix == 512)
+	    	 if(ButtonMatrix == 512 && edge == 1)
 	    	 {
 	    		 StateOfNumber = firstnum;
 	    	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
@@ -204,21 +216,21 @@ int main(void)
 	     case firstnum:
 	     {
 	    	 Test = 2;
-	    	 if(ButtonMatrix == 2)
+	    	 if(ButtonMatrix == 2 && edge == 1)
 	    	 {
 	    		 StateOfNumber = secondnum;
 	    	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
 	    	 else
 	    	 {
-	    		 StateOfNumber = initState;
+	    		 StateOfNumber = firstnum;
 	    	 }
 	     }
 	     break;
@@ -226,21 +238,21 @@ int main(void)
 	     case secondnum:
 	     {
 	    	 Test = 3;
-	    	 if(ButtonMatrix == 1024)
+	    	 if(ButtonMatrix == 1024 && edge == 1)
 	    	 {
 	    		 StateOfNumber = thirdnum;
 	    	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = firstnum;
 	    	 }
 	    	 else
 	    	 {
-	    		 StateOfNumber = initState;
+	    		 StateOfNumber = secondnum;
 	    	 }
 	     }
 	     break;
@@ -248,21 +260,21 @@ int main(void)
 	     case thirdnum:
 	     {
 	    	 Test = 4;
-	    	 if(ButtonMatrix == 2)
+	    	 if(ButtonMatrix == 2 && edge == 1)
 	    	 {
 	    		 StateOfNumber = fourthnum;
 	    	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = secondnum;
 	    	 }
 	    	 else
 	    	 {
-	    		 StateOfNumber = initState;
+	    		 StateOfNumber = thirdnum;
 	    	 }
 	     }
 	     break;
@@ -270,21 +282,21 @@ int main(void)
 	     case fourthnum:
 	     {
 	    	 Test = 5;
-	    	 if(ButtonMatrix == 8)
+	    	 if(ButtonMatrix == 8 && edge == 1)
 	    	 {
 	    		 StateOfNumber = fifthnum;
 	    	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = thirdnum;
 	    	 }
 	    	 else
 	    	 {
-	    		 StateOfNumber = initState;
+	    		 StateOfNumber = fourthnum;
 	    	 }
 	     }
 	     break;
@@ -617,13 +629,13 @@ static void MX_GPIO_Init(void)
 void ReadMatrixButton_1Row()
 	{
 	static uint8_t X = 0;
-
 	// read L1-L4
 	register int i;
 	for(i=0;i<4;i++)
 	{
-		if(HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN))
+		if(HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN)) //== 1(high)
 		{
+			Check[X*4+i].current = 1;
 			ButtonMatrix &= ~(1<<(X*4+i));
 			// i == 0, x == 0
 			// ~(1<<0)
@@ -633,15 +645,43 @@ void ReadMatrixButton_1Row()
 		}
 		else
 		{
+			Check[X*4+i].current = 0;
 			ButtonMatrix |= 1<<(X*4+i);
+			//B1.current = ButtonMatrix |= 1<<(X*4+i);
 			// 0b0000000000000100
+
+			if(Check[X*4+i].last == 1 && Check[X*4+i].current == 0)
+			{
+				edge = 1;
+			}
+			else
+			{
+				edge = 0;
+			}
 		}
+		Check[X*4+i].last = Check[X*4+i].current;
 	}
 	HAL_GPIO_WritePin(R[X].PORT, R[X].PIN, 1);
 	HAL_GPIO_WritePin(R[(X+1)%4].PORT, R[(X+1)%4].PIN, 0);
 	X++;
 	X%=4;
 	}
+
+
+//// read B1 and save state to GPIO state structure
+//B1.current = HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN);
+//
+//// check if detect falling edge
+//if(B1.last == 1 && B1.current == 0)
+//{
+//	  // Toggle LED LD2
+//	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+//}
+//
+//// save current state to last state for next loop
+//B1.last = B1.current;
+
+
 
 //void firstnum_PP()
 //{
