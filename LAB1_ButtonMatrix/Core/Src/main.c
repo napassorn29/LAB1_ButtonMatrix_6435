@@ -96,6 +96,9 @@ PortPin L[4] =
 uint16_t ButtonMatrix = 0;
 uint16_t Test = 0;
 uint16_t edge = 0;
+int num[20]={0}, j = 0;
+int StudentNumber[11] = {6,4,3,4,0,5,0,0,0,3,5};
+int checkLED = 0;
 
 typedef enum
 {
@@ -139,6 +142,8 @@ typedef enum
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
+void StateNum();
+void ReadMatrixButton_1Row();
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -200,323 +205,325 @@ int main(void)
 	      timestamp = HAL_GetTick() + 10;
 	      ReadMatrixButton_1Row();
 	     }
+	     StateNum();
 
 	     // read system events
 
-	     switch (StateOfNumber)
-	     {
 
-	     case initState:
-	     {
-	    	 Test = 1;
-	    	 if(ButtonMatrix == 512 && edge == 1)
-	    	 {
-	    		 StateOfNumber = firstnum;
-	    	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	     }
-	     break;
-
-	     case firstnum:
-	     {
-	    	 Test = 2;
-	    	 if(ButtonMatrix == 2 && edge == 1)
-	    	 {
-	    		 StateOfNumber = secondnum;
-	    	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else
-	    	 {
-	    		 StateOfNumber = firstnum;
-	    	 }
-	     }
-	     break;
-
-	     case secondnum:
-	     {
-	    	 Test = 3;
-	    	 if(ButtonMatrix == 1024 && edge == 1)
-	    	 {
-	    		 StateOfNumber = thirdnum;
-	    	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    		 StateOfNumber = firstnum;
-	    	 }
-	    	 else
-	    	 {
-	    		 StateOfNumber = secondnum;
-	    	 }
-	     }
-	     break;
-
-	     case thirdnum:
-	     {
-	    	 Test = 4;
-	    	 if(ButtonMatrix == 2 && edge == 1)
-	    	 {
-	    		 StateOfNumber = fourthnum;
-	    	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    		 StateOfNumber = secondnum;
-	    	 }
-	    	 else
-	    	 {
-	    		 StateOfNumber = thirdnum;
-	    	 }
-	     }
-	     break;
-
-	     case fourthnum:
-	     {
-	    	 Test = 5;
-	    	 if(ButtonMatrix == 8 && edge == 1)
-	    	 {
-	    		 StateOfNumber = fifthnum;
-	    	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    		 StateOfNumber = thirdnum;
-	    	 }
-	    	 else
-	    	 {
-	    		 StateOfNumber = fourthnum;
-	    	 }
-	     }
-	     break;
-
-	     case fifthnum:
-	     {
-	    	 Test = 6;
-	    	 if(ButtonMatrix == 32 && edge == 1)
-	    	 {
-	    		 StateOfNumber = sixnum;
-	    	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    		 StateOfNumber = fourthnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else
-	    	 {
-	    		 StateOfNumber = fifthnum;
-	    	 }
-	     }
-	     break;
-
-	     case sixnum:
-	     {
-	    	 Test = 7;
-	    	 if(ButtonMatrix == 8 && edge == 1)
-	    	 {
-	    		 StateOfNumber = sevennum;
-	    	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    	 	 StateOfNumber = fifthnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else
-	    	 {
-	    		 StateOfNumber = sixnum;
-	    	 }
-	     }
-	     break;
-
-	     case sevennum:
-	     {
-	    	 Test = 8;
-	    	 if(ButtonMatrix == 8 && edge == 1)
-	    	 {
-	    		 StateOfNumber = eighthnum;
-	     	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    	 	 StateOfNumber = sixnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	     	 else
-	     	 {
-	     		 StateOfNumber = sevennum;
-	     	 }
-	     }
-	     break;
-
-	     case eighthnum:
-	     {
-	    	 Test = 9;
-	    	 if(ButtonMatrix == 8 && edge == 1)
-	    	 {
-	    		 StateOfNumber = ninthnum;
-	     	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    		 StateOfNumber = sevennum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	     	 else
-	     	 {
-	     		 StateOfNumber = eighthnum;
-	     	 }
-	     }
-	     break;
-
-	     case ninthnum:
-	     {
-	    	 Test = 10;
-	    	 if(ButtonMatrix == 1024 && edge == 1)
-	    	 {
-	    		 StateOfNumber = tenthnum;
-	     	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    	 	 StateOfNumber = eighthnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	     	 else
-	     	 {
-	     		 StateOfNumber = ninthnum;
-	     	 }
-	     }
-	     break;
-
-	     case tenthnum:
-	     {
-	    	 Test = 11;
-	    	 if(ButtonMatrix == 32 && edge == 1)
-	    	 {
-	    		 StateOfNumber = eleventhnum;
-	     	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    	 	 StateOfNumber = ninthnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	     	 else
-	     	 {
-	     		 StateOfNumber = tenthnum;
-	     	 }
-	     }
-	     break;
-
-	     case eleventhnum:
-	     {
-	    	 Test = 12;
-	    	 if(ButtonMatrix == 32768 && edge == 1)
-	    	 {
-	    		 StateOfNumber = OKstudentnumber;
-	     	 }
-	    	 else if(ButtonMatrix == 4096 && edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	    	 else if(ButtonMatrix == 8192 && edge == 1)
-	    	 {
-	    	 	 StateOfNumber = tenthnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	     	 else
-	     	 {
-	     		 StateOfNumber = eleventhnum;
-	     	 }
-	     }
-	     break;
-
-	     case OKstudentnumber:
-	     {
-	    	 Test = 13;
-	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
-	    	 if(ButtonMatrix == 512 && edge == 1)
-	    	 {
-	    		 StateOfNumber = firstnum;
-	     	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
-	     	 else
-	     	 {
-	     		 StateOfNumber = OKstudentnumber;
-	     	 }
-	     }
-	     break;
-	     }
+//	     switch (StateOfNumber)
+//	     {
+//
+//	     case initState:
+//	     {
+//	    	 Test = 1;
+//	    	 if(ButtonMatrix == 512 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = firstnum;
+//	    	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	     }
+//	     break;
+//
+//	     case firstnum:
+//	     {
+//	    	 Test = 2;
+//	    	 if(ButtonMatrix == 2 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = secondnum;
+//	    	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else
+//	    	 {
+//	    		 StateOfNumber = firstnum;
+//	    	 }
+//	     }
+//	     break;
+//
+//	     case secondnum:
+//	     {
+//	    	 Test = 3;
+//	    	 if(ButtonMatrix == 1024 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = thirdnum;
+//	    	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = firstnum;
+//	    	 }
+//	    	 else
+//	    	 {
+//	    		 StateOfNumber = secondnum;
+//	    	 }
+//	     }
+//	     break;
+//
+//	     case thirdnum:
+//	     {
+//	    	 Test = 4;
+//	    	 if(ButtonMatrix == 2 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = fourthnum;
+//	    	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = secondnum;
+//	    	 }
+//	    	 else
+//	    	 {
+//	    		 StateOfNumber = thirdnum;
+//	    	 }
+//	     }
+//	     break;
+//
+//	     case fourthnum:
+//	     {
+//	    	 Test = 5;
+//	    	 if(ButtonMatrix == 8 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = fifthnum;
+//	    	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = thirdnum;
+//	    	 }
+//	    	 else
+//	    	 {
+//	    		 StateOfNumber = fourthnum;
+//	    	 }
+//	     }
+//	     break;
+//
+//	     case fifthnum:
+//	     {
+//	    	 Test = 6;
+//	    	 if(ButtonMatrix == 32 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = sixnum;
+//	    	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = fourthnum;
+//	    	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else
+//	    	 {
+//	    		 StateOfNumber = fifthnum;
+//	    	 }
+//	     }
+//	     break;
+//
+//	     case sixnum:
+//	     {
+//	    	 Test = 7;
+//	    	 if(ButtonMatrix == 8 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = sevennum;
+//	    	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    	 	 StateOfNumber = fifthnum;
+//	    	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else
+//	    	 {
+//	    		 StateOfNumber = sixnum;
+//	    	 }
+//	     }
+//	     break;
+//
+//	     case sevennum:
+//	     {
+//	    	 Test = 8;
+//	    	 if(ButtonMatrix == 8 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = eighthnum;
+//	     	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    	 	 StateOfNumber = sixnum;
+//	    	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	     	 else
+//	     	 {
+//	     		 StateOfNumber = sevennum;
+//	     	 }
+//	     }
+//	     break;
+//
+//	     case eighthnum:
+//	     {
+//	    	 Test = 9;
+//	    	 if(ButtonMatrix == 8 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = ninthnum;
+//	     	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = sevennum;
+//	    	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	     	 else
+//	     	 {
+//	     		 StateOfNumber = eighthnum;
+//	     	 }
+//	     }
+//	     break;
+//
+//	     case ninthnum:
+//	     {
+//	    	 Test = 10;
+//	    	 if(ButtonMatrix == 1024 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = tenthnum;
+//	     	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    	 	 StateOfNumber = eighthnum;
+//	    	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	     	 else
+//	     	 {
+//	     		 StateOfNumber = ninthnum;
+//	     	 }
+//	     }
+//	     break;
+//
+//	     case tenthnum:
+//	     {
+//	    	 Test = 11;
+//	    	 if(ButtonMatrix == 32 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = eleventhnum;
+//	     	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    	 	 StateOfNumber = ninthnum;
+//	    	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	     	 else
+//	     	 {
+//	     		 StateOfNumber = tenthnum;
+//	     	 }
+//	     }
+//	     break;
+//
+//	     case eleventhnum:
+//	     {
+//	    	 Test = 12;
+//	    	 if(ButtonMatrix == 32768 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = OKstudentnumber;
+//	     	 }
+//	    	 else if(ButtonMatrix == 4096 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	    	 else if(ButtonMatrix == 8192 && edge == 1)
+//	    	 {
+//	    	 	 StateOfNumber = tenthnum;
+//	    	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	     	 else
+//	     	 {
+//	     		 StateOfNumber = eleventhnum;
+//	     	 }
+//	     }
+//	     break;
+//
+//	     case OKstudentnumber:
+//	     {
+//	    	 Test = 13;
+//	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+//	    	 if(ButtonMatrix == 512 && edge == 1)
+//	    	 {
+//	    		 StateOfNumber = firstnum;
+//	     	 }
+//	    	 else if(edge == 1)
+//	    	 {
+//	    		 StateOfNumber = initState;
+//	    	 }
+//	     	 else
+//	     	 {
+//	     		 StateOfNumber = OKstudentnumber;
+//	     	 }
+//	     }
+//	     break;
+//	     }
   }
   /* USER CODE END 3 */
 }
@@ -702,10 +709,10 @@ void ReadMatrixButton_1Row()
 			{
 				edge = 1;
 			}
-			else
-			{
-				edge = 0;
-			}
+//			else
+//			{
+//				edge = 0;
+//			}
 		}
 		Check[X*4+i].last = Check[X*4+i].current;
 	}
@@ -714,6 +721,103 @@ void ReadMatrixButton_1Row()
 	X++;
 	X%=4;
 	}
+
+
+void StateNum()
+{
+    if (ButtonMatrix == 4096 && edge == 1)
+    {
+    	 j = 0;
+    	 for(int m=0;m<21;m++)
+    	 {
+    		 num[m]=0;
+    	 }
+    }
+    else if (ButtonMatrix == 8192 && edge == 1)
+    {
+    	 num[j-1] = 0;
+    	 j = j-1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 8 && edge == 1)
+    {
+    	 num[j] = 0;
+   	 	 j=j+1;
+   	 	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 4 && edge == 1)
+    {
+    	 num[j] = 1;
+   	 	 j=j+1;
+   	 	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 64 && edge == 1)
+    {
+    	 num[j] = 2;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 1024 && edge == 1)
+    {
+    	 num[j] = 3;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 2 && edge == 1)
+    {
+    	 num[j] = 4;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 32 && edge == 1)
+    {
+    	 num[j] = 5;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 512 && edge == 1)
+    {
+    	 num[j] = 6;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 1 && edge == 1)
+    {
+    	 num[j] = 7;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 16 && edge == 1)
+    {
+    	 num[j] = 8;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 256 && edge == 1)
+    {
+    	 num[j] = 9;
+    	 j=j+1;
+    	 checkLED = 0;
+    }
+    else if(ButtonMatrix == 32768 && edge == 1)
+    {
+    	 for(int k=0;k<12;k++)
+    	 {
+    		 if(num[k] == StudentNumber[k])
+    		 {
+    			checkLED = 1;
+    			j = 0;
+    			for(int m=0;m<21;m++)
+    			{
+    				num[m]=0;
+    			}
+    		 }
+    	 }
+    }
+
+    edge = 0;
+}
+
 
 
 //// read B1 and save state to GPIO state structure
