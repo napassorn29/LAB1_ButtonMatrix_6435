@@ -243,10 +243,6 @@ int main(void)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
 	    	 else
 	    	 {
 	    		 StateOfNumber = firstnum;
@@ -268,10 +264,6 @@ int main(void)
 	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = firstnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
 	    	 }
 	    	 else
 	    	 {
@@ -295,10 +287,6 @@ int main(void)
 	    	 {
 	    		 StateOfNumber = secondnum;
 	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
-	    	 }
 	    	 else
 	    	 {
 	    		 StateOfNumber = thirdnum;
@@ -320,10 +308,6 @@ int main(void)
 	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = thirdnum;
-	    	 }
-	    	 else if(edge == 1)
-	    	 {
-	    		 StateOfNumber = initState;
 	    	 }
 	    	 else
 	    	 {
