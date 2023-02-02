@@ -99,6 +99,7 @@ uint16_t edge = 0;
 int num[20]={0}, j = 0;
 int StudentNumber[11] = {6,4,3,4,0,5,0,0,0,3,5};
 int checkLED = 0;
+int SameNum = 0;
 
 /* USER CODE END PV */
 
@@ -457,15 +458,20 @@ void StateNum()
     	 {
     		 if(num[k] == StudentNumber[k])
     		 {
-    			checkLED = 1;
-    			HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
-    			j = 0;
-    			for(int m=0;m<21;m++)
-    			{
-    				num[m]=0;
-    			}
+    			 SameNum = SameNum + 1;
     		 }
     	 }
+    	 if(SameNum == 11)
+    	 {
+    		 checkLED = 1;
+    		 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
+    		 j = 0;
+    		 for(int m=0;m<21;m++)
+    		 {
+    			 num[m]=0;
+    		 }
+    	 }
+    	 SameNum = 0;
     }
 
     edge = 0;
