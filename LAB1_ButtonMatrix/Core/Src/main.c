@@ -304,21 +304,21 @@ int main(void)
 	     case fifthnum:
 	     {
 	    	 Test = 6;
-	    	 if(ButtonMatrix == 32)
+	    	 if(ButtonMatrix == 32 && edge == 1)
 	    	 {
 	    		 StateOfNumber = sixnum;
 	    	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = fourthnum;
 	    	 }
 	    	 else
 	    	 {
-	    		 StateOfNumber = initState;
+	    		 StateOfNumber = fifthnum;
 	    	 }
 	     }
 	     break;
@@ -326,15 +326,15 @@ int main(void)
 	     case sixnum:
 	     {
 	    	 Test = 7;
-	    	 if(ButtonMatrix == 8)
+	    	 if(ButtonMatrix == 8 && edge == 1)
 	    	 {
 	    		 StateOfNumber = sevennum;
 	    	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    	 	 StateOfNumber = fifthnum;
 	    	 }
@@ -348,15 +348,15 @@ int main(void)
 	     case sevennum:
 	     {
 	    	 Test = 8;
-	    	 if(ButtonMatrix == 8)
+	    	 if(ButtonMatrix == 8 && edge == 1)
 	    	 {
 	    		 StateOfNumber = eighthnum;
 	     	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    	 	 StateOfNumber = sixnum;
 	    	 }
@@ -370,15 +370,15 @@ int main(void)
 	     case eighthnum:
 	     {
 	    	 Test = 9;
-	    	 if(ButtonMatrix == 8)
+	    	 if(ButtonMatrix == 8 && edge == 1)
 	    	 {
 	    		 StateOfNumber = ninthnum;
 	     	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = sevennum;
 	    	 }
@@ -392,15 +392,15 @@ int main(void)
 	     case ninthnum:
 	     {
 	    	 Test = 10;
-	    	 if(ButtonMatrix == 1024)
+	    	 if(ButtonMatrix == 1024 && edge == 1)
 	    	 {
 	    		 StateOfNumber = tenthnum;
 	     	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    	 	 StateOfNumber = eighthnum;
 	    	 }
@@ -414,15 +414,15 @@ int main(void)
 	     case tenthnum:
 	     {
 	    	 Test = 11;
-	    	 if(ButtonMatrix == 32)
+	    	 if(ButtonMatrix == 32 && edge == 1)
 	    	 {
 	    		 StateOfNumber = eleventhnum;
 	     	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    	 	 StateOfNumber = ninthnum;
 	    	 }
@@ -436,15 +436,15 @@ int main(void)
 	     case eleventhnum:
 	     {
 	    	 Test = 12;
-	    	 if(ButtonMatrix == 32768)
+	    	 if(ButtonMatrix == 32768 && edge == 1)
 	    	 {
 	    		 StateOfNumber = OKstudentnumber;
 	     	 }
-	    	 else if(ButtonMatrix == 4096)
+	    	 else if(ButtonMatrix == 4096 && edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
-	    	 else if(ButtonMatrix == 8192)
+	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    	 	 StateOfNumber = tenthnum;
 	    	 }
@@ -458,13 +458,18 @@ int main(void)
 	     case OKstudentnumber:
 	     {
 	    	 Test = 13;
-	    	 if(ButtonMatrix == 8)
+	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+	    	 if(ButtonMatrix == 8 && edge == 1)
 	    	 {
 	    		 StateOfNumber = firstnum;
 	     	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	     	 else
 	     	 {
-	     		 StateOfNumber = initState;
+	     		 StateOfNumber = OKstudentnumber;
 	     	 }
 	     }
 	     break;
