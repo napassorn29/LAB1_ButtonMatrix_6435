@@ -51,7 +51,22 @@ typedef struct _CheckState
 
 CheckState Check[16] =
 {
-	{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1},{1}
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1},
+	{1, 1}
 }; // Check State
 
 typedef struct _PortPin
@@ -228,6 +243,10 @@ int main(void)
 	    	 {
 	    		 StateOfNumber = initState;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	    	 else
 	    	 {
 	    		 StateOfNumber = firstnum;
@@ -249,6 +268,10 @@ int main(void)
 	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = firstnum;
+	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
 	    	 }
 	    	 else
 	    	 {
@@ -272,6 +295,10 @@ int main(void)
 	    	 {
 	    		 StateOfNumber = secondnum;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	    	 else
 	    	 {
 	    		 StateOfNumber = thirdnum;
@@ -293,6 +320,10 @@ int main(void)
 	    	 else if(ButtonMatrix == 8192 && edge == 1)
 	    	 {
 	    		 StateOfNumber = thirdnum;
+	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
 	    	 }
 	    	 else
 	    	 {
@@ -316,6 +347,10 @@ int main(void)
 	    	 {
 	    		 StateOfNumber = fourthnum;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	    	 else
 	    	 {
 	    		 StateOfNumber = fifthnum;
@@ -338,9 +373,13 @@ int main(void)
 	    	 {
 	    	 	 StateOfNumber = fifthnum;
 	    	 }
-	    	 else
+	    	 else if(edge == 1)
 	    	 {
 	    		 StateOfNumber = initState;
+	    	 }
+	    	 else
+	    	 {
+	    		 StateOfNumber = sixnum;
 	    	 }
 	     }
 	     break;
@@ -360,9 +399,13 @@ int main(void)
 	    	 {
 	    	 	 StateOfNumber = sixnum;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	     	 else
 	     	 {
-	     		 StateOfNumber = initState;
+	     		 StateOfNumber = sevennum;
 	     	 }
 	     }
 	     break;
@@ -382,9 +425,13 @@ int main(void)
 	    	 {
 	    		 StateOfNumber = sevennum;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	     	 else
 	     	 {
-	     		 StateOfNumber = initState;
+	     		 StateOfNumber = eighthnum;
 	     	 }
 	     }
 	     break;
@@ -404,9 +451,13 @@ int main(void)
 	    	 {
 	    	 	 StateOfNumber = eighthnum;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	     	 else
 	     	 {
-	     		 StateOfNumber = initState;
+	     		 StateOfNumber = ninthnum;
 	     	 }
 	     }
 	     break;
@@ -426,9 +477,13 @@ int main(void)
 	    	 {
 	    	 	 StateOfNumber = ninthnum;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	     	 else
 	     	 {
-	     		 StateOfNumber = initState;
+	     		 StateOfNumber = tenthnum;
 	     	 }
 	     }
 	     break;
@@ -448,9 +503,13 @@ int main(void)
 	    	 {
 	    	 	 StateOfNumber = tenthnum;
 	    	 }
+	    	 else if(edge == 1)
+	    	 {
+	    		 StateOfNumber = initState;
+	    	 }
 	     	 else
 	     	 {
-	     		 StateOfNumber = initState;
+	     		 StateOfNumber = eleventhnum;
 	     	 }
 	     }
 	     break;
@@ -459,7 +518,7 @@ int main(void)
 	     {
 	    	 Test = 13;
 	    	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
-	    	 if(ButtonMatrix == 8 && edge == 1)
+	    	 if(ButtonMatrix == 512 && edge == 1)
 	    	 {
 	    		 StateOfNumber = firstnum;
 	     	 }
