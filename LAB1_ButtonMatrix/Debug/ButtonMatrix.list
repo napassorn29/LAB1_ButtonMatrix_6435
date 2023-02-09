@@ -21,29 +21,29 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         000000b8  20000000  080023d0  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000000cc  200000b8  08002488  000200b8  2**2
+  9 .bss          000000a8  200000b8  08002488  000200b8  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20000184  08002488  00020184  2**0
+ 10 ._user_heap_stack 00000600  20000160  08002488  00020160  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000200b8  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00007834  00000000  00000000  000200e8  2**0
+ 12 .debug_info   00007824  00000000  00000000  000200e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000012b6  00000000  00000000  0002791c  2**0
+ 13 .debug_abbrev 000012b6  00000000  00000000  0002790c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000618  00000000  00000000  00028bd8  2**3
+ 14 .debug_aranges 00000618  00000000  00000000  00028bc8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 000005b0  00000000  00000000  000291f0  2**3
+ 15 .debug_ranges 000005b0  00000000  00000000  000291e0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000147f5  00000000  00000000  000297a0  2**0
+ 16 .debug_macro  000147f5  00000000  00000000  00029790  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000781c  00000000  00000000  0003df95  2**0
+ 17 .debug_line   0000781c  00000000  00000000  0003df85  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008181c  00000000  00000000  000457b1  2**0
+ 18 .debug_str    0008181c  00000000  00000000  000457a1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  000c6fcd  2**0
+ 19 .comment      00000050  00000000  00000000  000c6fbd  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000017ec  00000000  00000000  000c7020  2**2
+ 20 .debug_frame  000017ec  00000000  00000000  000c7010  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -408,7 +408,7 @@ int main(void)
  800050e:	f000 fa0d 	bl	800092c <StateNum>
   {
  8000512:	e7ed      	b.n	80004f0 <main+0x14>
- 8000514:	20000178 	.word	0x20000178
+ 8000514:	20000154 	.word	0x20000154
 
 08000518 <SystemClock_Config>:
 /**
@@ -1035,7 +1035,7 @@ void ReadMatrixButton_1Row()
  8000910:	bf00      	nop
  8000912:	bd98      	pop	{r3, r4, r7, pc}
  8000914:	20000060 	.word	0x20000060
- 8000918:	2000017c 	.word	0x2000017c
+ 8000918:	20000158 	.word	0x20000158
  800091c:	20000000 	.word	0x20000000
  8000920:	20000118 	.word	0x20000118
  8000924:	2000011a 	.word	0x2000011a
@@ -1063,7 +1063,7 @@ void StateNum()
  8000944:	4b8d      	ldr	r3, [pc, #564]	; (8000b7c <StateNum+0x250>)
  8000946:	2200      	movs	r2, #0
  8000948:	601a      	str	r2, [r3, #0]
-    	 for(int m=0;m<21;m++)
+    	 for(int m=0;m<12;m++)
  800094a:	2300      	movs	r3, #0
  800094c:	60fb      	str	r3, [r7, #12]
  800094e:	e007      	b.n	8000960 <StateNum+0x34>
@@ -1073,12 +1073,12 @@ void StateNum()
  8000952:	68fb      	ldr	r3, [r7, #12]
  8000954:	2100      	movs	r1, #0
  8000956:	f842 1023 	str.w	r1, [r2, r3, lsl #2]
-    	 for(int m=0;m<21;m++)
+    	 for(int m=0;m<12;m++)
  800095a:	68fb      	ldr	r3, [r7, #12]
  800095c:	3301      	adds	r3, #1
  800095e:	60fb      	str	r3, [r7, #12]
  8000960:	68fb      	ldr	r3, [r7, #12]
- 8000962:	2b14      	cmp	r3, #20
+ 8000962:	2b0b      	cmp	r3, #11
  8000964:	ddf4      	ble.n	8000950 <StateNum+0x24>
     	 }
     	 HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
@@ -1388,10 +1388,10 @@ void StateNum()
  8000b72:	bf00      	nop
  8000b74:	20000118 	.word	0x20000118
  8000b78:	2000011a 	.word	0x2000011a
- 8000b7c:	2000016c 	.word	0x2000016c
+ 8000b7c:	20000148 	.word	0x20000148
  8000b80:	2000011c 	.word	0x2000011c
  8000b84:	40020000 	.word	0x40020000
- 8000b88:	20000170 	.word	0x20000170
+ 8000b88:	2000014c 	.word	0x2000014c
     }
     else if(ButtonMatrix == 16 && edge == 1)
  8000b8c:	4b40      	ldr	r3, [pc, #256]	; (8000c90 <StateNum+0x364>)
@@ -1555,12 +1555,12 @@ void StateNum()
  8000c8e:	bf00      	nop
  8000c90:	20000118 	.word	0x20000118
  8000c94:	2000011a 	.word	0x2000011a
- 8000c98:	2000016c 	.word	0x2000016c
+ 8000c98:	20000148 	.word	0x20000148
  8000c9c:	2000011c 	.word	0x2000011c
- 8000ca0:	20000170 	.word	0x20000170
+ 8000ca0:	2000014c 	.word	0x2000014c
  8000ca4:	40020000 	.word	0x40020000
  8000ca8:	20000080 	.word	0x20000080
- 8000cac:	20000174 	.word	0x20000174
+ 8000cac:	20000150 	.word	0x20000150
 
 08000cb0 <Error_Handler>:
 /**
@@ -2015,7 +2015,7 @@ LoopFillZerobss:
   ldr r2, =_sbss
  8000e5c:	200000b8 	.word	0x200000b8
   ldr r4, =_ebss
- 8000e60:	20000184 	.word	0x20000184
+ 8000e60:	20000160 	.word	0x20000160
 
 08000e64 <ADC_IRQHandler>:
  * @retval None       
@@ -2178,7 +2178,7 @@ __weak void HAL_IncTick(void)
  8000f28:	4770      	bx	lr
  8000f2a:	bf00      	nop
  8000f2c:	200000b4 	.word	0x200000b4
- 8000f30:	20000180 	.word	0x20000180
+ 8000f30:	2000015c 	.word	0x2000015c
 
 08000f34 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other 
@@ -2198,7 +2198,7 @@ __weak uint32_t HAL_GetTick(void)
  8000f40:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000f44:	4770      	bx	lr
  8000f46:	bf00      	nop
- 8000f48:	20000180 	.word	0x20000180
+ 8000f48:	2000015c 	.word	0x2000015c
 
 08000f4c <__NVIC_SetPriorityGrouping>:
            In case of a conflict between priority grouping and available

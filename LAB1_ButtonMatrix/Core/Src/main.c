@@ -96,7 +96,8 @@ PortPin L[4] =
 uint16_t ButtonMatrix = 0;
 uint16_t Test = 0;
 uint16_t edge = 0;
-int num[20]={0}, j = 0;
+
+int num[11]={0}, j = 0;
 int StudentNumber[11] = {6,4,3,4,0,5,0,0,0,3,5};
 int checkLED = 0;
 int SameNum = 0;
@@ -369,7 +370,7 @@ void StateNum()
     if (ButtonMatrix == 4096 && edge == 1)
     {
     	 j = 0;
-    	 for(int m=0;m<21;m++)
+    	 for(int m=0;m<12;m++)
     	 {
     		 num[m]=0;
     	 }
